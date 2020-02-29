@@ -1,0 +1,19 @@
+nodes:
+  - address: node1IP # node air gap network IP
+    user: rancher
+    role: ['controlplane', 'etcd', 'worker']
+    ssh_key_path: /home/user/.ssh/id_rsa
+  - address: node2IP # node air gap network IP
+    user: rancher
+    role: ['controlplane', 'etcd', 'worker']
+    ssh_key_path: /home/user/.ssh/id_rsa
+  - address: node3IP # node air gap network IP
+    user: rancher
+    role: ['controlplane', 'etcd', 'worker']
+    ssh_key_path: /home/user/.ssh/id_rsa
+
+private_registries:
+  - url: localhost:5000 # private registry url
+    user: rancher
+    password: 'password'
+    is_default: true
