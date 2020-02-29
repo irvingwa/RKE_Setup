@@ -1,5 +1,6 @@
 #!/bin/bash
 #nmtui
+##TODO When you add the IPs need to add to ssh known hosts
 yum -y install docker
 service docker start
 docker pull registry:2
@@ -46,5 +47,9 @@ chmod +x rancher-save-images.sh
 docker login localhost:5000
 chmod +x rancher-load-images.sh
  ./rancher-load-images.sh --image-list ./rancher-images.txt --registry localhost:5000
-
+curl -LO https://raw.githubusercontent.com/irvingwa/RKE_Setup/master/rancher-cluster.yml
+sed -i -e 's/node1IP/$node1_ip/g' ./rancher-cluster.yml
+sed -i -e 's/node2IP/$node2_ip/g' ./rancher-cluster.yml
+sed -i -e 's/node3IP/$node3_ip/g' ./rancher-cluster.yml
+rke up --config ./rancher-cluster.yml
 
