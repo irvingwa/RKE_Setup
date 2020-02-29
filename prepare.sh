@@ -15,3 +15,8 @@ curl -LO https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz
 tar -zxvf helm-v3.1.1-linux-amd64.tar.gz
 chmod +x linux-amd64/helm
 mv linux-amd64/helm /usr/local/bin/helm
+docker run -d -p 5000:5000 --name registry registry:2
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /etc/nginx.conf:/etc/nginx/nginx.conf \
+  nginx:1.14
