@@ -31,3 +31,20 @@ docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14
+curl -LO https://github.com/rancher/rancher/releases/download/v2.3.5/rancher-images.txt
+curl -LO https://github.com/rancher/rancher/releases/download/v2.3.5/rancher-save-images.sh
+curl -LO https://github.com/rancher/rancher/releases/download/v2.3.5/rancher-load-images.sh
+#Generate certs
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm fetch jetstack/cert-manager --version v0.9.1
+helm template ./cert-manager-<version>.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
+sort -u rancher-images.txt -o rancher-images.txt
+#End cert-man
+chmod +x rancher-save-images.sh
+./rancher-save-images.sh --image-list ./rancher-images.txt
+docker login localhost:5000
+chmod +x rancher-load-images.sh
+ ./rancher-load-images.sh --image-list ./rancher-images.txt --registry localhost:5000
+
+
