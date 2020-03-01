@@ -44,7 +44,6 @@ sort -u rancher-images.txt -o rancher-images.txt
 #End cert-man
 chmod +x rancher-save-images.sh
 ./rancher-save-images.sh --image-list ./rancher-images.txt
-docker login localhost:5000
 chmod +x rancher-load-images.sh
  ./rancher-load-images.sh --image-list ./rancher-images.txt --registry localhost:5000
 curl -LO https://raw.githubusercontent.com/irvingwa/RKE_Setup/master/rancher-cluster.yml
