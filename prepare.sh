@@ -39,7 +39,7 @@ curl -LO https://github.com/rancher/rancher/releases/download/v2.3.5/rancher-loa
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm fetch jetstack/cert-manager --version v0.9.1
-helm template ./cert-manager-<version>.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
+helm template ./cert-manager-v0.9.1.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
 sort -u rancher-images.txt -o rancher-images.txt
 #End cert-man
 chmod +x rancher-save-images.sh
