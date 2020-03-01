@@ -1,5 +1,5 @@
 #!/bin/bash
-#nmtui
+#Virtual Box  Look for "ONBOOT=yes" in /etc/sysconfig/network-scripts/ifcfg-<device>
 ##TODO When you add the IPs need to add to ssh known hosts with user rancher and ssh-copy-id user@node
 yum -y install docker
 service docker start
