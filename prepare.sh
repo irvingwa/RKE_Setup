@@ -1,6 +1,6 @@
 #!/bin/bash
 #nmtui
-##TODO When you add the IPs need to add to ssh known hosts
+##TODO When you add the IPs need to add to ssh known hosts with user rancher and ssh-copy-id user@node
 yum -y install docker
 service docker start
 docker pull registry:2
