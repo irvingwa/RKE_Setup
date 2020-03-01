@@ -1,6 +1,15 @@
 #!/bin/bash
 #Virtual Box  Look for "ONBOOT=yes" in /etc/sysconfig/network-scripts/ifcfg-<device>
 ##TODO When you add the IPs need to add to ssh known hosts with user rancher and ssh-copy-id user@node
+echo Docker Registry IP
+read docker_reg_ip
+echo Enter Node 1 IP
+read node1_ip
+echo Enter Node 2 IP
+read node2_ip
+echo Enter Node 3 IP
+read node3_ip
+
 yum -y install docker
 service docker start
 docker pull registry:2
@@ -18,14 +27,11 @@ chmod +x linux-amd64/helm
 mv linux-amd64/helm /usr/local/bin/helm
 curl -LO https://raw.githubusercontent.com/irvingwa/RKE_Setup/master/nginx.conf
 mv nginx.conf /etc/nginx.conf
-echo Enter Node 1 IP
-read node1_ip
+
 sed -i -e "s|node1IP|${node1_ip}|g" /etc/nginx.conf
-echo Enter Node 2 IP
-read node2_ip
+
 sed -i -e "s|node2IP|${node2_ip}|g" /etc/nginx.conf
-echo Enter Node 3 IP
-read node3_ip
+
 sed -i -e "s|node3IP|${node3_ip}|g" /etc/nginx.conf
 docker run -d -p 5000:5000 --name registry registry:2
 docker run -d --name nginx --restart=unless-stopped \
@@ -45,8 +51,6 @@ sort -u rancher-images.txt -o rancher-images.txt
 chmod +x rancher-save-images.sh
 ./rancher-save-images.sh --image-list ./rancher-images.txt
 chmod +x rancher-load-images.sh
-echo Docker Registry IP
-read docker_reg_ip
  ./rancher-load-images.sh --image-list ./rancher-images.txt --registry ${docker_reg_ip}:5000
 curl -LO https://raw.githubusercontent.com/irvingwa/RKE_Setup/master/rancher-cluster.yml
 sed -i -e "s|dockerRegIP|${docker_reg_ip}|g" ./rancher-cluster.yml
