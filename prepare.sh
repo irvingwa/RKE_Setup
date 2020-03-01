@@ -49,6 +49,7 @@ echo Docker Registry IP
 read docker_reg_ip
  ./rancher-load-images.sh --image-list ./rancher-images.txt --registry ${docker_reg_ip}:5000
 curl -LO https://raw.githubusercontent.com/irvingwa/RKE_Setup/master/rancher-cluster.yml
+sed -i -e "s|docker_reg_ip|${docker_reg_ip}|g" ./rancher-cluster.yml
 sed -i -e "s|node1IP|${node1_ip}|g" ./rancher-cluster.yml
 sed -i -e "s|node2IP|${node2_ip}|g" ./rancher-cluster.yml
 sed -i -e "s|node3IP|${node3_ip}|g" ./rancher-cluster.yml
