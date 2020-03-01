@@ -13,7 +13,7 @@ nodes:
     ssh_key_path: /home/user/.ssh/id_rsa
 
 private_registries:
-  - url: localhost:5000 # private registry url
-    user: rancher
-    password: 'password'
+  - url: dockerRegIP:5000 # private registry url
+    #user: rancher
+    #password: 'password'
     is_default: true
