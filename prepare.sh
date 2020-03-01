@@ -28,7 +28,7 @@ echo Enter Node 3 IP
 read node3_ip
 sed -i -e "s|node3IP|${node3_ip}|g" /etc/nginx.conf
 docker run -d -p 5000:5000 --name registry registry:2
-docker run -d --restart=unless-stopped \
+docker run -d --name nginx --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14
