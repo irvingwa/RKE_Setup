@@ -45,7 +45,9 @@ sort -u rancher-images.txt -o rancher-images.txt
 chmod +x rancher-save-images.sh
 ./rancher-save-images.sh --image-list ./rancher-images.txt
 chmod +x rancher-load-images.sh
- ./rancher-load-images.sh --image-list ./rancher-images.txt --registry localhost:5000
+echo Docker Registry IP
+read docker_reg_ip
+ ./rancher-load-images.sh --image-list ./rancher-images.txt --registry ${docker_reg_ip}:5000
 curl -LO https://raw.githubusercontent.com/irvingwa/RKE_Setup/master/rancher-cluster.yml
 sed -i -e "s|node1IP|${node1_ip}|g" ./rancher-cluster.yml
 sed -i -e "s|node2IP|${node2_ip}|g" ./rancher-cluster.yml
