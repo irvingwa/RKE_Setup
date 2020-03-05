@@ -1,16 +1,16 @@
 nodes:
   - address: node1IP # node air gap network IP
-    user: rancher
+    user: user
     role: ['controlplane', 'etcd', 'worker']
-    ssh_key_path: /root/.ssh/id_rsa
+    ssh_key_path: /home/user/.ssh/id_rsa
   - address: node2IP # node air gap network IP
-    user: rancher
+    user: user
     role: ['controlplane', 'etcd', 'worker']
-    ssh_key_path: /root/.ssh/id_rsa
+    ssh_key_path: /home/user/.ssh/id_rsa
   - address: node3IP # node air gap network IP
-    user: rancher
+    user: user
     role: ['controlplane', 'etcd', 'worker']
-    ssh_key_path: /root/.ssh/id_rsa
+    ssh_key_path: /home/user/.ssh/id_rsa
 
 private_registries:
   - url: dockerRegIP:5000 # private registry url
