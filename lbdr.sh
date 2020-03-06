@@ -17,6 +17,10 @@ sed -i -e "s|node1IP|${node1_ip}|g" /etc/nginx.conf
 sed -i -e "s|node2IP|${node2_ip}|g" /etc/nginx.conf
 
 sed -i -e "s|node3IP|${node3_ip}|g" /etc/nginx.conf
+docker stop nginx
+docker stop registry
+docker rm nginx
+docker rm registry
 docker run -d -p 5000:5000 --name registry registry:2
 docker run -d --name nginx --restart=unless-stopped \
   -p 80:80 -p 443:443 \
