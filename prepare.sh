@@ -51,21 +51,21 @@ helm fetch rancher-latest/rancher
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm fetch jetstack/cert-manager --version v0.12.0
-helm template cert-manager ./cert-manager-v0.12.0.tgz --output-dir . \
-   --namespace cert-manager \
-   --set image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-controller \
-   --set webhook.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-webhook \
-   --set cainjector.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-cainjector
-curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
-helm template rancher ./rancher-v2.3.5.tgz --output-dir . \
- --namespace cattle-system \
- --set hostname=<RANCHER.YOURDOMAIN.COM> \
- --set certmanager.version=v0.12.0 \
- --set rancherImage=${docker_reg_ip}:5000/rancher/rancher \
- --set systemDefaultRegistry=${docker_reg_ip}:5000 \ # Available as of v2.2.0, set a default private registry to be used in Rancher
- --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-kubectl create namespace cert-manager
-kubectl apply -f cert-manager/cert-manager-crd.yaml
-kubectl apply -R -f ./cert-manager
-kubectl create namespace cattle-system
-kubectl -n cattle-system apply -R -f ./rancher
+#helm template cert-manager ./cert-manager-v0.12.0.tgz --output-dir . \
+#   --namespace cert-manager \
+ #  --set image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-controller \
+  # --set webhook.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-webhook \
+   #--set cainjector.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-cainjector
+#curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
+#helm template rancher ./rancher-v2.3.5.tgz --output-dir . \
+ #--namespace cattle-system \
+ #--set hostname=<RANCHER.YOURDOMAIN.COM> \
+ #--set certmanager.version=v0.12.0 \
+ #--set rancherImage=${docker_reg_ip}:5000/rancher/rancher \
+ #--set systemDefaultRegistry=${docker_reg_ip}:5000 \ # Available as of v2.2.0, set a default private registry to be used in Rancher
+ #--set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
+#kubectl create namespace cert-manager
+#kubectl apply -f cert-manager/cert-manager-crd.yaml
+#kubectl apply -R -f ./cert-manager
+#kubectl create namespace cattle-system
+#kubectl -n cattle-system apply -R -f ./rancher
