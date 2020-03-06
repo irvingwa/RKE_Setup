@@ -2,6 +2,7 @@
 sshkeygen -t rsa <br />
 ssh-copy-id to all nodes as user<br />
 firewall-cmd --permanent --add-port=2379/tcp everywhere<br />
+firewall-cmd --permanent --add-port=6443/tcp everywhere<br />
 firewall-cmd --reload<br />
 install docker everywhere<br />
 /etc/docker/dameon.json<br />
