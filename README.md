@@ -1,8 +1,8 @@
 # RKE_Setup
 sshkeygen -t rsa <br />
 ssh-copy-id to all nodes as user<br />
-systemctl disable firewalld everywhere<br />
-systemctl stop firewalld everywhere<br />
+firewall-cmd --permanent --add-port=2379/tcp everywhere<br />
+firewall-cmd --reload<br />
 install docker everywhere<br />
 /etc/docker/dameon.json<br />
 "insecure-registries" : ["registry:5000"] everywhere<br />
