@@ -1,20 +1,20 @@
 # RKE_Setup
-sshkeygen -t rsa
-ssh-copy-id to all nodes as user
-systemctl disable firewalld everywhere
-systemctl stop firewalld everywhere
-install docker everywhere
-/etc/docker/dameon.json
-"insecure-registries" : ["registry:5000"] everywhere
-on non airgapped node add docker proxy
-/etc/systemd/system/docker.service.d/http-proxy.conf
-[Service]
-Environment="HTTP_PROXY=http://proxy.example.com:80/"
-Environment="HTTPS_PROXY=http://proxy.example.com:80/"
-Environment="NO_PROXY=.test.com"
-systemctl daemon-reload
-systemctl restart docker
-on nginx machine enable ipv4 forwarding
-vi /etc/sysctl.conf
-net.ipv4.ip_forward=1
-sysctl -p /etc/sysctl.conf
+sshkeygen -t rsa <br />
+ssh-copy-id to all nodes as user<br />
+systemctl disable firewalld everywhere<br />
+systemctl stop firewalld everywhere<br />
+install docker everywhere<br />
+/etc/docker/dameon.json<br />
+"insecure-registries" : ["registry:5000"] everywhere<br />
+on non airgapped node add docker proxy<br />
+/etc/systemd/system/docker.service.d/http-proxy.conf<br />
+[Service]<br />
+Environment="HTTP_PROXY=http://proxy.example.com:80/"<br />
+Environment="HTTPS_PROXY=http://proxy.example.com:80/"<br />
+Environment="NO_PROXY=.test.com"<br />
+systemctl daemon-reload<br />
+systemctl restart docker<br />
+on nginx machine enable ipv4 forwarding<br />
+vi /etc/sysctl.conf<br />
+net.ipv4.ip_forward=1<br />
+sysctl -p /etc/sysctl.conf<br />
