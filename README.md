@@ -1,10 +1,19 @@
 # RKE_Setup
 sshkeygen -t rsa <br />
 ssh-copy-id to all nodes as user<br />
-firewall-cmd --permanent --add-port=2379/tcp everywhere<br />
-firewall-cmd --permanent --add-port=2380/tcp everywhere<br />
-firewall-cmd --permanent --add-port=6443/tcp everywhere<br />
-firewall-cmd --permanent --add-port=10250/tcp everywhere<br />
+firewall-cmd --permanent --add-port=22/tcp<br />
+firewall-cmd --permanent --add-port=80/tcp<br />
+firewall-cmd --permanent --add-port=443/tcp<br />
+firewall-cmd --permanent --add-port=2376/tcp<br />
+firewall-cmd --permanent --add-port=2379/tcp<br />
+firewall-cmd --permanent --add-port=2380/tcp<br />
+firewall-cmd --permanent --add-port=6443/tcp<br />
+firewall-cmd --permanent --add-port=8472/udp<br />
+firewall-cmd --permanent --add-port=9099/tcp<br />
+firewall-cmd --permanent --add-port=10250/tcp<br />
+firewall-cmd --permanent --add-port=10254/tcp<br />
+firewall-cmd --permanent --add-port=30000-32767/tcp<br />
+firewall-cmd --permanent --add-port=30000-32767/udp<br />
 firewall-cmd --reload<br />
 service firewalld restart<br />
 install docker everywhere<br />
