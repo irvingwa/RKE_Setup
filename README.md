@@ -6,6 +6,7 @@ firewall-cmd --permanent --add-port=2380/tcp everywhere<br />
 firewall-cmd --permanent --add-port=6443/tcp everywhere<br />
 firewall-cmd --permanent --add-port=10250/tcp everywhere<br />
 firewall-cmd --reload<br />
+service firewalld restart<br />
 install docker everywhere<br />
 /etc/docker/dameon.json<br />
 "insecure-registries" : ["registry:5000"] everywhere<br />
