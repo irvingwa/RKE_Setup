@@ -57,7 +57,7 @@ helm template cert-manager ./cert-manager-v0.12.0.tgz --output-dir . \
    --set webhook.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-webhook \
    --set cainjector.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-cainjector
 curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
-helm template rancher ./rancher-v2.3.5.tgz --output-dir . \
+helm template rancher ./rancher-2.3.5.tgz --output-dir . \
  --namespace cattle-system \
  --set hostname=${docker_reg_ip} \
  --set certmanager.version=v0.12.0 \
@@ -65,7 +65,7 @@ helm template rancher ./rancher-v2.3.5.tgz --output-dir . \
  --set systemDefaultRegistry=${docker_reg_ip}:5000 \
  --set useBundledSystemChart=true
 kubectl create namespace cert-manager
-kubectl apply -f cert-manager/cert-manager-crd.yaml
+kubectl apply -f cert-manager/cert-manager-crd.yaml 
 kubectl apply -R -f ./cert-manager
 kubectl create namespace cattle-system
 kubectl -n cattle-system apply -R -f ./rancher
