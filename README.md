@@ -1,6 +1,8 @@
 # RKE_Setup
 sshkeygen -t rsa <br />
 ssh-copy-id to all nodes as user<br />
+docker stop $(docker ps -a -q)<br />
+docker rm $(docker ps -a -q)<br />
 firewall-cmd --permanent --add-port=22/tcp<br />
 firewall-cmd --permanent --add-port=80/tcp<br />
 firewall-cmd --permanent --add-port=443/tcp<br />
