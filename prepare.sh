@@ -64,8 +64,8 @@ helm template rancher ./rancher-2.3.5.tgz --output-dir . \
  --set rancherImage=${docker_reg_ip}:5000/rancher/rancher \
  --set systemDefaultRegistry=${docker_reg_ip}:5000 \
  --set useBundledSystemChart=true
-kubectl create namespace cert-manager
-kubectl apply -f cert-manager/cert-manager-crd.yaml 
-kubectl apply -R -f ./cert-manager
-kubectl create namespace cattle-system
-kubectl -n cattle-system apply -R -f ./rancher
+kubectl create namespace cert-manager --kubeconfig kube_config_rancher-cluster.yml
+kubectl apply -f cert-manager/cert-manager-crd.yaml --kubeconfig kube_config_rancher-cluster.yml
+kubectl apply -R -f ./cert-manager --kubeconfig kube_config_rancher-cluster.yml
+kubectl create namespace cattle-system --kubeconfig kube_config_rancher-cluster.yml
+kubectl -n cattle-system apply -R -f ./rancher --kubeconfig kube_config_rancher-cluster.yml
