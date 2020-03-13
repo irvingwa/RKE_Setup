@@ -32,8 +32,8 @@ curl -LO https://github.com/rancher/rancher/releases/download/v2.3.5/rancher-loa
 #Generate certs
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
-helm fetch jetstack/cert-manager --version v0.9.1
-helm template ./cert-manager-v0.9.1.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
+helm fetch jetstack/cert-manager --version v0.14.0
+helm template ./cert-manager-v0.14.0.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
 sort -u rancher-images.txt -o rancher-images.txt
 #End cert-man
 chmod +x rancher-save-images.sh
@@ -50,17 +50,17 @@ helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
 helm fetch rancher-latest/rancher
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
-helm fetch jetstack/cert-manager --version v0.12.0
-helm template cert-manager ./cert-manager-v0.12.0.tgz --output-dir . \
+helm fetch jetstack/cert-manager --version v0.14.0
+helm template cert-manager ./cert-manager-v0.14.0.tgz --output-dir . \
    --namespace cert-manager \
    --set image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-controller \
    --set webhook.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-webhook \
    --set cainjector.image.repository=${docker_reg_ip}:5000/quay.io/jetstack/cert-manager-cainjector
-curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
+curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.14/deploy/manifests/00-crds.yaml
 helm template rancher ./rancher-2.3.5.tgz --output-dir . \
  --namespace cattle-system \
  --set hostname=${docker_reg_ip} \
- --set certmanager.version=v0.12.0 \
+ --set certmanager.version=v0.14.0 \
  --set rancherImage=${docker_reg_ip}:5000/rancher/rancher \
  --set systemDefaultRegistry=${docker_reg_ip}:5000 \
  --set useBundledSystemChart=true
