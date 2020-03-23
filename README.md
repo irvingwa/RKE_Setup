@@ -33,3 +33,8 @@ on nginx machine enable ipv4 forwarding<br />
 vi /etc/sysctl.conf<br />
 net.ipv4.ip_forward=1<br />
 sysctl -p /etc/sysctl.conf<br />
+
+Then Run
+./lbdr.sh
+then
+./prepare.sh
